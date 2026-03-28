@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carosello Concorso - Striano Moda & Home</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1A2A4A;
+    font-family: 'Georgia', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  h1 {
+    color: #D4A017;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    text-align: center;
+    opacity: 0.85;
+  }
+
+  .carousel-wrapper {
+    position: relative;
+    width: 380px;
+    max-width: 100%;
+  }
+
+  .slides-container {
+    overflow: hidden;
+    border-radius: 18px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .slide-track {
+    display: flex;
+    transition: transform 0.45s cubic-bezier(0.77,0,0.175,1);
+  }
+
+  .slide {
+    min-width: 380px;
+    max-width: 380px;
+    height: 480px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ─── SLIDE 1 ─── */
+  .slide-1 { background: linear-gradient(160deg, #1A2A4A 0%, #2C3E6E 100%); }
+  .slide-1 .top-band {
+    background: linear-gradient(90deg, #C0392B, #922B21);
+    padding: 18px 20px 14px;
+    text-align: center;
+    border-bottom: 3px solid #D4A017;
+  }
+  .slide-1 .brand {
+    font-size: 10px;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .slide-1 .concorso-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+    margin: 6px 0 2px;
+    line-height: 1.15;
+  }
+  .slide-1 .subtitle {
+    font-size: 11px;
+    color: #D4A017;
+    font-style: italic;
+    letter-spacing: 1px;
+  }
+  .slide-1 .body { flex: 1; padding: 22px 24px 0; }
+  .slide-1 .intro {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.85);
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .slide-1 .step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    gap: 14px;
+  }
+  .step-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #D4A017;
+    color: #1A2A4A;
+    font-weight: bold;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-text {
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.5;
+  }
+  .step-text strong { color: #D4A017; }
+  .slide-1 .hashtag-box {
+    background: rgba(212,160,23,0.12);
+    border: 1px solid #D4A017;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-top: 6px;
+    text-align: center;
+  }
+  .slide-1 .hashtag-box p {
+    font-size: 11.5px;
+    color: #D4A017;
+    font-weight: bold;
+    line-height: 1.8;
+  }
+  .slide-1 .deadline {
+    background: #C0392B;
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin-top: 14px;
+    text-align: center;
+    font-size: 11px;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+
+  /* ─── SLIDE 2 ─── */
+  .slide-2 { background: linear-gradient(160deg, #FFF8EC 0%, #FDF0D5 100%); }
+  .slide-2 .top-band {
+    background: linear-gradient(90deg, #D4A017, #B8860B);
+    padding: 16px 20px 12px;
+    text-align: center;
+    border-bottom: 3px solid #C0392B;
+  }
+  .slide-2 .top-band .cat-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .slide-2 .top-band .cat-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    margin: 4px 0 2px;
+  }
+  .slide-2 .top-band .emoji-big { font-size: 26px; }
+  .slide-2 .body { padding: 20px 24px; }
+  .slide-2 .desc {
+    font-size: 13px;
+    color: #2C3E50;
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .slide-2 .product-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px 18px;
+    border-left: 4px solid #D4A017;
+    margin-bottom: 16px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  }
+  .slide-2 .product-card .prod-label {
+    font-size: 10px;
+    color: #7F8C8D;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .slide-2 .product-card .prod-name {
+    font-size: 13px;
+    color: #1A2A4A;
+    font-weight: bold;
+  }
+  .slide-2 .prize-box {
+    background: linear-gradient(135deg, #C0392B, #922B21);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(192,57,43,0.35);
+  }
+  .prize-box .prize-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.75);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .prize-box .prize-value {
+    font-size: 36px;
+    font-weight: bold;
+    color: #D4A017;
+    line-height: 1;
+  }
+  .prize-box .prize-dept {
+    font-size: 12px;
+    color: #fff;
+    margin-top: 4px;
+  }
+  .slide-2 .cta {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 11.5px;
+    color: #7F8C8D;
+    font-style: italic;
+  }
+
+  /* ─── SLIDE 3 ─── */
+  .slide-3 { background: linear-gradient(160deg, #EBF5FF 0%, #D6EAF8 100%); }
+  .slide-3 .top-band {
+    background: linear-gradient(90deg, #C0392B, #922B21);
+    padding: 16px 20px 12px;
+    text-align: center;
+    border-bottom: 3px solid #1A2A4A;
+  }
+  .slide-3 .top-band .cat-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .slide-3 .top-band .cat-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    margin: 4px 0 2px;
+  }
+  .slide-3 .body { padding: 20px 24px; }
+  .slide-3 .desc {
+    font-size: 13px;
+    color: #2C3E50;
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .slide-3 .product-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px 18px;
+    border-left: 4px solid #C0392B;
+    margin-bottom: 16px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  }
+  .slide-3 .product-card .prod-label {
+    font-size: 10px;
+    color: #7F8C8D;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .slide-3 .product-card .prod-name {
+    font-size: 13px;
+    color: #1A2A4A;
+    font-weight: bold;
+  }
+  .slide-3 .prize-box {
+    background: linear-gradient(135deg, #1A2A4A, #2C3E6E);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(26,42,74,0.35);
+  }
+  .slide-3 .footer-info {
+    margin-top: 14px;
+    background: rgba(26,42,74,0.07);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 10.5px;
+    color: #555;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* ─── FOOTER SLIDE (comune) ─── */
+  .slide-footer {
+    padding: 7px 18px 5px;
+    background: #1A2A4A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto;
+    gap: 2px;
+  }
+  .slide-footer-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .slide-footer-url {
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    color: #D4A017;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    text-decoration: none;
+  }
+  .slide-footer .brand-small {
+    font-size: 9px;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 1px;
+  }
+  .slide-footer .slide-n {
+    font-size: 9px;
+    color: #D4A017;
+    font-weight: bold;
+  }
+
+  /* ─── CONTROLLI ─── */
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(212,160,23,0.5);
+    color: #D4A017;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .btn:hover { background: rgba(212,160,23,0.25); }
+  .dots { display: flex; gap: 7px; }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .dot.active { background: #D4A017; width: 22px; border-radius: 4px; }
+
+  .note {
+    color: rgba(255,255,255,0.4);
+    font-size: 10px;
+    margin-top: 12px;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+
+<h1>&#128247; Carosello Instagram / Facebook &mdash; Anteprima Digitale</h1>
+
+<div class="carousel-wrapper">
+  <div class="slides-container">
+    <div class="slide-track" id="track">
+
+      <!-- SLIDE 1: Cover + Come Partecipare -->
+      <div class="slide slide-1">
+        <div class="top-band">
+          <p class="brand">Striano Moda &amp; Home &mdash; Pagani (SA)</p>
+          <p class="concorso-title">&#128247; GRANDE CONCORSO STRIANO</p>
+          <p class="subtitle">La Tradizione Ti Premia!</p>
+        </div>
+        <div class="body">
+          <p class="intro">Hai acquistato un prodotto della nostra<br>
+          collezione dedicata alla <strong style="color:#D4A017">Festa delle Galline 2026</strong>?<br>
+          Partecipa e vinci!</p>
+
+          <div class="step">
+            <div class="step-num">1</div>
+            <p class="step-text">Scatta una <strong>foto che celebri la Festa</strong> con il prodotto Striano acquistato.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <p class="step-text">Pubblicala su <strong>Facebook o Instagram</strong> (profilo pubblico o storie).</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <p class="step-text">Inserisci i due hashtag <strong>obbligatori</strong> &darr;</p>
+          </div>
+
+          <div class="hashtag-box">
+            <p>#StrianoModaEHome<br>#FestaMadonnaGalline2026</p>
+          </div>
+          <div class="deadline">&#9201; Scadenza: Marted&igrave; 14 Aprile 2026</div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-row">
+            <span class="brand-small">STRIANO MODA &amp; HOME</span>
+            <span class="slide-n">1 / 3</span>
+          </div>
+          <a href="https://strianomoda.com" class="slide-footer-url">strianomoda.com</a>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: La Tavola più Bella -->
+      <div class="slide slide-2">
+        <div class="top-band">
+          <p class="cat-label">Categoria 1</p>
+          <p class="emoji-big">&#127863;</p>
+          <p class="cat-title">La Tavola pi&ugrave; Bella</p>
+        </div>
+        <div class="body">
+          <p class="desc">Fotografa la tua <strong>tavola imbandita</strong><br>
+          con le nostre <strong>tovaglie e runner</strong><br>
+          della collezione Festa 2026!</p>
+
+          <div class="product-card">
+            <p class="prod-label">Prodotti in gara</p>
+            <p class="prod-name">&#127863; Tovaglie &amp; Runner<br>Collezione Madonna delle Galline</p>
+          </div>
+
+          <div class="prize-box">
+            <p class="prize-label">&#127873; Il tuo premio</p>
+            <p class="prize-value">15%</p>
+            <p class="prize-dept">Buono Sconto &mdash; Reparto HOME / CASA</p>
+          </div>
+
+          <p class="cta">I vincitori annunciati sui nostri social ufficiali!</p>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-row">
+            <span class="brand-small">STRIANO MODA &amp; HOME</span>
+            <span class="slide-n">2 / 3</span>
+          </div>
+          <a href="https://strianomoda.com" class="slide-footer-url">strianomoda.com</a>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: Lo Schizzo più Simpatico -->
+      <div class="slide slide-3">
+        <div class="top-band">
+          <p class="cat-label">Categoria 2</p>
+          <p style="font-size:26px">&#127837;</p>
+          <p class="cat-title">Lo Schizzo pi&ugrave; Simpatico</p>
+        </div>
+        <div class="body">
+          <p class="desc">Scattati un <strong>selfie divertente</strong> mentre mangi<br>
+          i tagliolini con la nostra<br>
+          <strong>Maglietta &ldquo;Ritmo &amp; Devozione&rdquo;</strong> o il <strong>Bavettone</strong>!</p>
+
+          <div class="product-card">
+            <p class="prod-label">Prodotti in gara</p>
+            <p class="prod-name">&#128081; Maglietta &ldquo;Ritmo &amp; Devozione&rdquo;<br>&#129360; Bavettone Striano</p>
+          </div>
+
+          <div class="prize-box">
+            <p class="prize-label" style="color:rgba(255,255,255,0.75)">&#127873; Il tuo premio</p>
+            <p class="prize-value">15%</p>
+            <p class="prize-dept" style="color:#fff">Buono Sconto &mdash; Reparto MODA / ABBIGL.</p>
+          </div>
+
+          <div class="footer-info">
+            &#128204; Buono personale &bull; Non cumulabile &bull; Valido entro 31/05/2026<br>
+            <strong>Via G. Marconi 88/90, Pagani (SA)</strong>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-row">
+            <span class="brand-small">STRIANO MODA &amp; HOME</span>
+            <span class="slide-n">3 / 3</span>
+          </div>
+          <a href="https://strianomoda.com" class="slide-footer-url">strianomoda.com</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="btn" onclick="go(-1)">&#8592;</div>
+    <div class="dots" id="dots">
+      <div class="dot active" onclick="goTo(0)"></div>
+      <div class="dot" onclick="goTo(1)"></div>
+      <div class="dot" onclick="goTo(2)"></div>
+    </div>
+    <div class="btn" onclick="go(1)">&#8594;</div>
+  </div>
+</div>
+
+<p class="note">&#8592; Scorri tra le 3 slide &bull; Formato: 1:1 (1080&times;1080 px) &bull; Adatto per Instagram &amp; Facebook</p>
+
+<script>
+  let cur = 0;
+  const total = 3;
+  const track = document.getElementById('track');
+  const dots = document.querySelectorAll('.dot');
+
+  function update() {
+    track.style.transform = `translateX(-${cur * 380}px)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+  }
+
+  function go(dir) {
+    cur = (cur + dir + total) % total;
+    update();
+  }
+
+  function goTo(i) {
+    cur = i;
+    update();
+  }
+
+  // Touch/swipe
+  let startX = 0;
+  track.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+  });
+
+  // Auto-avanzamento
+  setInterval(() => go(1), 5000);
+</script>
+</body>
+</html>
